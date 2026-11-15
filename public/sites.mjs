@@ -5,7 +5,7 @@ export const SITES = [
   {
     id: 'douyin', name: '抖音', desc: '视频、图集去水印',
     url: 'https://douyinqushuiyin.pages.dev/', color: '#d3123a', enabled: true,
-    hosts: ['douyin.com', 'iesdouyin.com', 'douyinvod.com', 'amemv.com'],
+    hosts: ['douyin.com', 'iesdouyin.com', 'amemv.com'],
   },
   {
     id: 'kuaishou', name: '快手', desc: '视频、图集去水印',
@@ -35,6 +35,6 @@ export const SITES = [
   {
     id: 'weibo', name: '微博', desc: '图片、实况、视频',
     url: 'https://weibojiexiceshi.xiweiniboss.workers.dev/', color: '#be123c', enabled: false,
-    hosts: ['weibo.com', 'weibo.cn', 't.cn', 'sina.cn'],
+    hosts: ['weibo.com', 'weibo.cn', 't.cn', 'sina.cn', 'sina.com.cn'],
   },
 ];

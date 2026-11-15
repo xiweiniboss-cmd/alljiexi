@@ -103,3 +103,17 @@ test('新加的 .cn 短链域名：冒充的仍然不认', () => {
     'https://bili22.cn.evil.example/x', 'https://notbili33.cn/x', 'https://acg.tv/x',
   ]) assert.equal(detect(u).reason, 'unknown', u);
 });
+
+test('抖音：amemv.com 老域名认，douyinvod.com（下载 CDN，不是分享链接）不认', () => {
+  assert.equal(detect('https://www.amemv.com/share/video/7300000000000000000/').site.id, 'douyin');
+  for (const u of ['https://v26-web.douyinvod.com/abc/video.mp4', 'https://amemv.com.evil.example/x', 'https://fakeamemv.com/x'])
+    assert.equal(detect(u).reason, 'unknown', u);
+});
+
+test('微博：sina.com.cn 认（和微博站白名单一致），冒充的不认', () => {
+  const r = detect('https://video.sina.com.cn/p/news/2026-11-15/detail-abc.d.html');
+  assert.equal(r.site.id, 'weibo');
+  assert.equal(r.reason, 'disabled');
+  for (const u of ['https://sina.com.cn.evil.example/x', 'https://fakesina.com.cn/x', 'https://sina.com.cn-evil.com/x'])
+    assert.equal(detect(u).reason, 'unknown', u);
+});
