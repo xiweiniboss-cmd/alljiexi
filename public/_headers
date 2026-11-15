@@ -1,0 +1,11 @@
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), clipboard-read=(self)
+  Cross-Origin-Opener-Policy: same-origin
+  X-Frame-Options: DENY
+
+/*.mjs
+  Content-Type: text/javascript; charset=utf-8
+  Cache-Control: public, max-age=300
