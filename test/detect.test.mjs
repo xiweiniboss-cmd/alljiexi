@@ -44,13 +44,28 @@ for (const [site, text, url] of cases) {
   });
 }
 
-test('微博识别出来但未上线时不跳转', () => {
-  for (const t of ['https://weibo.com/1234567890/NabCdEfGh', 'https://m.weibo.cn/status/4950000000000000', '分享自微博 http://t.cn/A6abcDEF', 'https://video.weibo.com/show?fid=1034:4950000000000000']) {
-    const r = detect(t);
-    assert.equal(r.ok, false);
-    assert.equal(r.reason, 'disabled');
+test('微博已上线：常见链接都能识别并跳到解析站', () => {
+  const cases = [
+    ['https://weibo.com/1234567890/NabCdEfGh', 'https://weibo.com/1234567890/NabCdEfGh'],
+    ['https://m.weibo.cn/status/4950000000000000', 'https://m.weibo.cn/status/4950000000000000'],
+    ['分享自微博 http://t.cn/A6abcDEF', 'http://t.cn/A6abcDEF'],
+    ['https://video.weibo.com/show?fid=1034:4950000000000000', 'https://video.weibo.com/show?fid=1034:4950000000000000'],
+  ];
+  for (const [text, url] of cases) {
+    const r = detect(text);
+    assert.equal(r.ok, true, JSON.stringify(r));
     assert.equal(r.site.id, 'weibo');
+    assert.equal(r.url, new URL(url).href);
   }
+});
+
+test('微博 targetHref 用 #url= 预填到解析站（解析站会读 hash，不自动解析）', () => {
+  const r = detect('https://weibo.com/6105713761/5365557513950545');
+  assert.equal(r.ok, true);
+  assert.equal(
+    targetHref(r.site, r.url),
+    'https://weibojiexiceshi.xiweiniboss.workers.dev/#url=' + encodeURIComponent(r.url),
+  );
 });
 
 test('不认识的平台、没有链接、空输入', () => {
@@ -112,8 +127,8 @@ test('抖音：amemv.com 老域名认，douyinvod.com（下载 CDN，不是分�
 
 test('微博：sina.com.cn 认（和微博站白名单一致），冒充的不认', () => {
   const r = detect('https://video.sina.com.cn/p/news/2026-11-15/detail-abc.d.html');
+  assert.equal(r.ok, true);
   assert.equal(r.site.id, 'weibo');
-  assert.equal(r.reason, 'disabled');
   for (const u of ['https://sina.com.cn.evil.example/x', 'https://fakesina.com.cn/x', 'https://sina.com.cn-evil.com/x'])
     assert.equal(detect(u).reason, 'unknown', u);
 });

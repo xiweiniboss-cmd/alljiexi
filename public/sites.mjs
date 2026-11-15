@@ -34,7 +34,7 @@ export const SITES = [
   },
   {
     id: 'weibo', name: '微博', desc: '图片、实况、视频',
-    url: 'https://weibojiexiceshi.xiweiniboss.workers.dev/', color: '#be123c', enabled: false,
+    url: 'https://weibojiexiceshi.xiweiniboss.workers.dev/', color: '#be123c', enabled: true,
     hosts: ['weibo.com', 'weibo.cn', 't.cn', 'sina.cn', 'sina.com.cn'],
   },
 ];
