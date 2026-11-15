@@ -19,6 +19,12 @@ const cases = [
   ['bilibili', 'https://m.bilibili.com/video/BV1GJ411x7h7', 'https://m.bilibili.com/video/BV1GJ411x7h7'],
   ['bilibili', '这个视频 BV1GJ411x7h7 好看', 'https://www.bilibili.com/video/BV1GJ411x7h7'],
   ['bilibili', '【标题】 https://bili2233.cn/xYz9876', 'https://bili2233.cn/xYz9876'],
+  ['bilibili', '【标题】 https://bili22.cn/aB12cD3', 'https://bili22.cn/aB12cD3'],
+  ['bilibili', '【标题】 https://bili23.cn/aB12cD3', 'https://bili23.cn/aB12cD3'],
+  ['bilibili', '【标题】 https://bili33.cn/aB12cD3', 'https://bili33.cn/aB12cD3'],
+  ['xiaohongshu', '93 【周末去哪儿 - 小红薯的笔记 | 小红书 - 你的生活兴趣社区】 😆 Xy9Zw8Vu7Ts 😆 https://xhslink.cn/o/AxnRePgIokn 复制本条信息，打开【小红书】App查看精彩内容！', 'https://xhslink.cn/o/AxnRePgIokn'],
+  ['xiaohongshu', 'https://www.rednote.com/explore/66aaaaaaaaaaaaaaaaaaaaaa?xsec_token=x', 'https://www.rednote.com/explore/66aaaaaaaaaaaaaaaaaaaaaa?xsec_token=x'],
+  ['kuaishou', 'https://v.kuaishou.cn/2xYzAbC 复制此链接，打开【快手】直接观看！', 'https://v.kuaishou.cn/2xYzAbC'],
   ['youtube', 'https://youtu.be/dQw4w9WgXcQ?si=AbCdEfGhIjKlMn', 'https://youtu.be/dQw4w9WgXcQ?si=AbCdEfGhIjKlMn'],
   ['youtube', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=42s', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=42s'],
   ['youtube', 'https://youtube.com/shorts/AbCdEfGhIjK?si=xyz', 'https://youtube.com/shorts/AbCdEfGhIjK?si=xyz'],
@@ -88,4 +94,12 @@ test('extractUrls 去重并按顺序', () => {
 test('targetHref 用 hash 传参并编码', () => {
   const site = detect('https://b23.tv/a?x=1&y=2').site;
   assert.equal(targetHref(site, 'https://b23.tv/a?x=1&y=2'), 'https://bilibilishipinjiexi.pages.dev/#url=https%3A%2F%2Fb23.tv%2Fa%3Fx%3D1%26y%3D2');
+});
+
+test('新加的 .cn 短链域名：冒充的仍然不认', () => {
+  for (const u of [
+    'https://xhslink.cn.evil.example/o/x', 'https://evilxhslink.cn/o/x', 'https://xhslink.cn-evil.com/o/x',
+    'https://v.kuaishou.cn.evil.example/x', 'https://fakekuaishou.cn/x',
+    'https://bili22.cn.evil.example/x', 'https://notbili33.cn/x', 'https://acg.tv/x',
+  ]) assert.equal(detect(u).reason, 'unknown', u);
 });
