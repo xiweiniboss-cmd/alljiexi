@@ -1,29 +1,29 @@
 /* 解析总入口。颜色跟各解析站同一套石墨中性色；默认跟随系统浅色 / 深色。 */
 :root {
   color-scheme: light dark;
-  --bg: #f6f6f4; --surface: #ffffff; --raised: #efefec; --raised-hover: #e6e6e2;
-  --line: #e2e2de; --line-strong: #cfcfca;
-  --text: #18181a; --text-2: #55555b; --text-3: #7a7a80;
-  --accent: #18181a; --accent-text: #ffffff;
+  --bg: #f4eedc; --surface: #fbf7eb; --raised: #f1e9d5; --raised-hover: #e9dfc6;
+  --line: #dcd1b8; --line-strong: #c5b599;
+  --text: #2a2118; --text-2: #564736; --text-3: #705f49;
+  --accent: #9c4c26; --accent-text: #fbf7eb;
   --ok: #15803d; --warn: #a16207; --err: #b91c1c;
   --radius: 14px; --shadow: 0 1px 2px rgba(0,0,0,.04), 0 6px 24px rgba(0,0,0,.05);
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #141415; --surface: #19191b; --raised: #232325; --raised-hover: #2a2a2d;
-    --line: #2a2a2d; --line-strong: #3a3a3e;
-    --text: #ededed; --text-2: #a5a5ab; --text-3: #7d7d84;
-    --accent: #ededed; --accent-text: #141415;
+    --bg: #181410; --surface: #241f19; --raised: #302920; --raised-hover: #392e23;
+    --line: #392e23; --line-strong: #3a3a3e;
+    --text: #f3e9d8; --text-2: #cfc1aa; --text-3: #afa08a;
+    --accent: #e0a477; --accent-text: #181410;
     --ok: #4ade80; --warn: #facc15; --err: #f87171;
     --shadow: none;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #141415; --surface: #19191b; --raised: #232325; --raised-hover: #2a2a2d;
-  --line: #2a2a2d; --line-strong: #3a3a3e;
-  --text: #ededed; --text-2: #a5a5ab; --text-3: #7d7d84;
-  --accent: #ededed; --accent-text: #141415;
+  --bg: #181410; --surface: #241f19; --raised: #302920; --raised-hover: #392e23;
+  --line: #392e23; --line-strong: #3a3a3e;
+  --text: #f3e9d8; --text-2: #cfc1aa; --text-3: #afa08a;
+  --accent: #e0a477; --accent-text: #181410;
   --ok: #4ade80; --warn: #facc15; --err: #f87171;
   --shadow: none;
 }
@@ -141,3 +141,15 @@ code { font-family: var(--mono); font-size: .92em; background: var(--raised); pa
   .work .primary { width: 100%; margin-left: 0; }
 }
 .notes { overflow-wrap: anywhere; }
+
+body {
+  background-image: radial-gradient(ellipse at 12% 0%, color-mix(in srgb, var(--surface) 68%, transparent), transparent 58%),
+    radial-gradient(ellipse at 94% 100%, rgb(181 145 81 / 12%), transparent 65%);
+}
+
+.hero h1, .sites h2, .notes h2 { font-family: "Songti SC", "Noto Serif CJK SC", Georgia, serif; }
+.btn.primary { background-image: linear-gradient(var(--accent), color-mix(in srgb, var(--accent) 90%, #4d291c)); }
+.btn.ghost, .theme-btn { background: linear-gradient(var(--surface), var(--raised)); }
+
+.hero h1 { font-style: oblique 8deg; }
+.brand-sub { font-family: "Songti SC", "STSong", "Noto Serif SC", "Noto Serif CJK SC", Georgia, serif; font-style: italic; letter-spacing: .03em; }
