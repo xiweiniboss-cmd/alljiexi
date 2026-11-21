@@ -45,6 +45,7 @@
           <button type="button" class="btn ghost" id="clearBtn">清空</button>
           <button type="submit" class="btn primary" id="goBtn">识别并前往</button>
         </div>
+        <p class="muted">请仅保存你自己的作品，或已获授权保存的内容。</p>
         <div class="result" id="result" role="status" aria-live="polite" hidden></div>
       </form>
     </section>
@@ -65,7 +66,7 @@
     </section>
   </main>
 
-  <footer class="foot">仅供个人保存自己有权使用的内容，请尊重原作者版权。</footer>
+  <footer class="foot">仅供个人保存自己有权使用的内容，请尊重原作者版权。<details><summary>版权投诉</summary><p>请选择涉及的解析站，填写原作品链接、权利说明和回复方式。</p><div id="rightsSites"></div></details></footer>
 </div>
 <noscript><p class="noscript">需要开启 JavaScript 才能自动识别。也可以直接点上面的站点卡片。</p></noscript>
 <script type="module" src="app.mjs"></script>

@@ -27,6 +27,13 @@ for (const s of SITES) {
   if (s.enabled) a.appendChild(el('span', 'arrow', '→'));
   li.appendChild(a);
   grid.appendChild(li);
+  if (s.enabled) {
+    const report = el('a', '', s.name);
+    const url = new URL(s.url);
+    url.searchParams.set('feedback', 'copyright');
+    report.href = url.href;
+    $('rightsSites').append(report, '　');
+  }
 }
 
 /* ---------- 识别 ---------- */
