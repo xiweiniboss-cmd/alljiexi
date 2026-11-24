@@ -2,7 +2,7 @@
 :root {
   color-scheme: light dark;
   --bg: #f4eedc; --surface: #fbf7eb; --raised: #f1e9d5; --raised-hover: #e9dfc6;
-  --line: #dcd1b8; --line-strong: #c5b599;
+  --line: #dcd1b8; --line-strong: #c5b599; --control-line: #8a7a62;
   --text: #2a2118; --text-2: #564736; --text-3: #705f49;
   --accent: #9c4c26; --accent-text: #fbf7eb;
   --ok: #15803d; --warn: #a16207; --err: #b91c1c;
@@ -12,7 +12,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #181410; --surface: #241f19; --raised: #302920; --raised-hover: #392e23;
-    --line: #392e23; --line-strong: #3a3a3e;
+    --line: #392e23; --line-strong: #54473a; --control-line: #8a785f;
     --text: #f3e9d8; --text-2: #cfc1aa; --text-3: #afa08a;
     --accent: #e0a477; --accent-text: #181410;
     --ok: #4ade80; --warn: #facc15; --err: #f87171;
@@ -21,7 +21,7 @@
 }
 :root[data-theme="dark"] {
   --bg: #181410; --surface: #241f19; --raised: #302920; --raised-hover: #392e23;
-  --line: #392e23; --line-strong: #3a3a3e;
+  --line: #392e23; --line-strong: #54473a; --control-line: #8a785f;
   --text: #f3e9d8; --text-2: #cfc1aa; --text-3: #afa08a;
   --accent: #e0a477; --accent-text: #181410;
   --ok: #4ade80; --warn: #facc15; --err: #f87171;
@@ -43,7 +43,7 @@ body {
 .mark { color: var(--text); flex: none; }
 .brand { flex: 1; line-height: 1.25; }
 .brand-name { font-weight: 600; font-size: 15px; }
-.brand-sub { font-size: 12px; color: var(--text-3); letter-spacing: .04em; }
+.brand-sub { font-size: 13px; color: var(--text-3); letter-spacing: .04em; }
 .theme-btn {
   width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line);
   background: var(--surface); color: var(--text-2); display: grid; place-items: center; cursor: pointer;
@@ -65,11 +65,11 @@ body {
 .field-label { display: block; font-size: 13px; color: var(--text-3); margin: 0 2px 8px; }
 textarea {
   width: 100%; min-height: 112px; resize: vertical; display: block;
-  background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: 10px;
+  background: var(--bg); color: var(--text); border: 1px solid var(--control-line); border-radius: 10px;
   padding: 12px 13px; font: inherit; font-size: 16px; line-height: 1.5;
 }
 textarea::placeholder { color: var(--text-3); }
-textarea:focus { outline: none; border-color: var(--line-strong); box-shadow: 0 0 0 3px color-mix(in srgb, var(--text) 10%, transparent); }
+textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent); }
 
 .row { display: flex; gap: 8px; margin-top: 10px; }
 .btn {
@@ -91,7 +91,7 @@ textarea:focus { outline: none; border-color: var(--line-strong); box-shadow: 0 
 .result.ok { border-color: color-mix(in srgb, var(--ok) 40%, var(--line)); }
 .result.warn .r-head { color: var(--warn); }
 .result.err .r-head { color: var(--err); }
-.r-url { font-family: var(--mono); font-size: 12.5px; color: var(--text-3); word-break: break-all; margin: 4px 0 10px !important; }
+.r-url { font-family: var(--mono); font-size: 13px; color: var(--text-3); word-break: break-all; margin: 4px 0 10px !important; }
 .result .btn.primary { margin: 0; max-width: none; width: 100%; }
 .r-tip { font-size: 13px; color: var(--text-3); margin-top: 8px !important; }
 .chip {
@@ -101,6 +101,7 @@ textarea:focus { outline: none; border-color: var(--line-strong); box-shadow: 0 
 
 h2 { font-size: 13px; font-weight: 600; color: var(--text-3); letter-spacing: .06em; margin: 34px 2px 12px; }
 .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 420px) { .grid { grid-template-columns: minmax(0, 1fr); } }
 @media (min-width: 620px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .site {
   display: flex; align-items: center; gap: 10px; height: 100%;
@@ -112,13 +113,12 @@ a.site:hover { border-color: var(--line-strong); background: var(--raised); }
 .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); flex: none; }
 .site-body { display: flex; flex-direction: column; min-width: 0; flex: 1; line-height: 1.35; }
 .site-name { font-weight: 600; }
-.site-desc { font-size: 12.5px; color: var(--text-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.arrow { color: var(--text-3); }
+.site-desc { font-size: 13px; color: var(--text-3); overflow-wrap: anywhere; }
 
 .notes ul { margin: 0; padding-left: 1.2em; color: var(--text-2); font-size: 14px; }
 .notes li { margin: 4px 0; }
-code { font-family: var(--mono); font-size: .92em; background: var(--raised); padding: 0 5px; border-radius: 5px; }
-.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--text-3); }
+code { font-family: var(--mono); font-size: max(13px, .92em); background: var(--raised); padding: 0 5px; border-radius: 5px; }
+.foot { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--text-3); }
 .noscript { text-align: center; color: var(--err); }
 
 @media (max-width: 380px) {
@@ -148,13 +148,15 @@ body {
 }
 
 .hero h1, .sites h2, .notes h2 { font-family: "Songti SC", "Noto Serif CJK SC", Georgia, serif; }
-.btn.primary { background-image: linear-gradient(var(--accent), color-mix(in srgb, var(--accent) 90%, #4d291c)); }
-.btn.ghost, .theme-btn { background: linear-gradient(var(--surface), var(--raised)); }
+.btn.ghost, .theme-btn { background: var(--surface); }
 
-.hero h1 { font-style: oblique 8deg; }
-.brand-sub { font-family: "Songti SC", "STSong", "Noto Serif SC", "Noto Serif CJK SC", Georgia, serif; font-style: italic; letter-spacing: .03em; }
+.brand-sub { font-family: "Songti SC", "STSong", "Noto Serif SC", "Noto Serif CJK SC", serif; font-style: normal; letter-spacing: .03em; }
 
-:root[data-theme="light"], :root:not([data-theme="dark"]) { --bg: #f5f0e3; --surface: #fffcf5; --raised: #f8f4ea; --accent: #68422e; }
+:root[data-theme="light"] { --bg: #f5f0e3; --surface: #fffcf5; --raised: #f8f4ea; --accent: #68422e; }
+/* 只在系统为浅色时套纸面；系统深色且没手动选主题时保持深色，不再出现浅底浅字。 */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) { --bg: #f5f0e3; --surface: #fffcf5; --raised: #f8f4ea; --accent: #68422e; }
+}
 .hero h1 { font-style: normal; font-weight: 600; letter-spacing: -.035em; line-height: 1.16; }
 .work { border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 18px 45px -24px rgba(76, 51, 27, .3); }
 .work textarea { padding: 16px; }

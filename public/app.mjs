@@ -24,7 +24,6 @@ for (const s of SITES) {
   body.appendChild(el('span', 'site-name', s.name));
   body.appendChild(el('span', 'site-desc', s.enabled ? s.desc : '即将上线'));
   a.appendChild(body);
-  if (s.enabled) a.appendChild(el('span', 'arrow', '→'));
   li.appendChild(a);
   grid.appendChild(li);
   if (s.enabled) {
